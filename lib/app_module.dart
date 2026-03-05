@@ -6,6 +6,7 @@ class AppModule extends Module {
   void binds(Injector i) {
     i.addLazySingleton(() => OnboardingStore());
 
+
     super.binds(i);
   }
 
@@ -14,8 +15,13 @@ class AppModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.module(Modular.initialRoute, module: CatalogModule());
-
-    super.routes(r);
+    r.child(
+      '/',
+      child: (_) => ShellPage(cartStore: Modular.get<CartStore>()),
+      children: [
+        ModuleRoute('/catalog', module: CatalogModule()),
+        ModuleRoute('/cart', module: CartModule()),
+      ],
+    );
   }
 }

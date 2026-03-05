@@ -12,9 +12,9 @@ class CartalogItensEmpty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ListTile(
-    title: Text(item.product.description),
+    title: Text(item.product.description ?? ''),
     subtitle: Text(
-      'Qtd: ${item.quantity} • \$${item.product.price.toStringAsFixed(2)}',
+      'Qtd: ${item.quantity} • \$${item.product.price?.toStringAsFixed(2)}',
     ),
     trailing: IconButton(
       onPressed: () {},

@@ -42,3 +42,10 @@ class Command0<T> extends Command<T> {
 
   Future<void> run() => execute(_action);
 }
+
+class Command1<TArg, T> extends Command<T> {
+  Command1(this._action);
+  final Future<Result<T>> Function(TArg arg) _action;
+
+  Future<void> run(TArg arg) => execute(() => _action(arg));
+}

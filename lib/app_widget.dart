@@ -16,7 +16,7 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   void initState() {
     super.initState();
-    Modular.setInitialRoute('/');
+    Modular.setInitialRoute('/catalog');
     Modular.setNavigatorKey(NavigatorHelper.nav);
   }
 

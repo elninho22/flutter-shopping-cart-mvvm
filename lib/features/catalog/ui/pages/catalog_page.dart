@@ -3,10 +3,14 @@ import '../../../../exports.dart';
 
 class CatalogPage extends StatefulWidget {
   final CatalogViewModel viewModel;
+  final CartViewModel cartViewModel;
+  final CartStore cartStore;
 
   const CatalogPage({
     super.key,
     required this.viewModel,
+    required this.cartViewModel,
+    required this.cartStore,
   });
 
   @override
@@ -14,7 +18,9 @@ class CatalogPage extends StatefulWidget {
 }
 
 class _CatalogPageState extends State<CatalogPage> {
-  CatalogViewModel get _viewModelCatalog => widget.viewModel;
+  CatalogViewModel get _viewModel => widget.viewModel;
+  CartViewModel get _cartViewModel => widget.cartViewModel;
+  CartStore get _cartStore => widget.cartStore;
 
   @override
   void initState() {
@@ -23,37 +29,39 @@ class _CatalogPageState extends State<CatalogPage> {
       if (!mounted) {
         return;
       }
-      _viewModelCatalog.getProductsCommand.run();
+      _viewModel.getProductsCommand.run();
     });
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: Text(
-        'Catalogo de Produtos',
-        style: UiTextStyles.heading20(),
-      ),
-    ),
-    body: LoadingDefault(
-      isLoading: _viewModelCatalog.getProductsCommand.isExecuting,
-      child: ListenableBuilder(
-        listenable: _viewModelCatalog.getProductsCommand,
-        builder: (context, _) {
-          if (_viewModelCatalog.items.isEmpty) {
-            return const UiShimmer();
-          }
-
-          return ListView.builder(
-            physics: const AlwaysScrollableScrollPhysics(),
-            itemCount: _viewModelCatalog.items.length,
-            itemBuilder: (context, index) {
-              final item = _viewModelCatalog.items[index];
-              return CartalogItens(item: item);
+  Widget build(BuildContext context) => ListenableBuilder(
+        listenable: _cartStore,
+        builder: (context, _) => RefreshIndicator(
+        onRefresh: () => _viewModel.getProductsCommand.run(),
+        child: LoadingDefault(
+          isLoading: _viewModel.getProductsCommand.isExecuting,
+          child: ListenableBuilder(
+            listenable: _viewModel.getProductsCommand,
+            builder: (context, _) {
+              if (_viewModel.items.isEmpty) {
+                return const UiShimmer();
+              }
+              return ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: _viewModel.items.length,
+                itemBuilder: (context, index) {
+                  final item = _viewModel.items[index];
+                  return CartalogItens(
+                    item: item,
+                    onAddToCart: _cartStore.canEdit
+                        ? () => _cartViewModel.addToCartCommand.run(item.product)
+                        : null,
+                  );
+                },
+              );
             },
-          );
-        },
+          ),
+        ),
       ),
-    ),
-  );
+    );
 }

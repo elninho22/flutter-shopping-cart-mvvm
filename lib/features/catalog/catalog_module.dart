@@ -27,7 +27,11 @@ class CatalogModule extends Module {
   void routes(RouteManager r) {
     r.child(
       Modular.initialRoute,
-      child: (_) => CatalogPage(viewModel: Modular.get<CatalogViewModel>()),
+      child: (_) => CatalogPage(
+        viewModel: Modular.get<CatalogViewModel>(),
+        cartViewModel: Modular.get<CartViewModel>(),
+        cartStore: Modular.get<CartStore>(),
+      ),
     );
   }
 }

@@ -3,6 +3,8 @@ import '../../exports.dart';
 
 class CoreModule extends Module {
   @override
+  List<Module> get imports => [GlobalCartModule()];
+  @override
   void exportedBinds(Injector i) {
     i.addLazySingleton<LoggerApp>(
       () => LoggerImpl(),
@@ -18,8 +20,4 @@ class CoreModule extends Module {
     );
   }
 
-  @override
-  void binds(Injector i) {
-    super.binds(i);
-  }
 }
