@@ -14,7 +14,7 @@ class AppModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    // r.child(Modular.initialRoute, child: (_) => CartItemPage());
+    r.module(Modular.initialRoute, module: CatalogModule());
 
     super.routes(r);
   }

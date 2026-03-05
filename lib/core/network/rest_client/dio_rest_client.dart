@@ -1,7 +1,7 @@
 
 
 import 'package:dio/dio.dart';
-import '../../core_library.dart';
+import '../../core_exports.dart';
 
 class DioRestClient implements RestClient {
   late Dio _dio;

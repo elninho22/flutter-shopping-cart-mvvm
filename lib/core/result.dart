@@ -3,24 +3,26 @@ sealed class Result<T> {
 
   bool get isSuccess => this is Success<T>;
   bool get isFailure => this is Failure<T>;
-  
+
   T? get valueOrNull => switch (this) {
-        Success(value: final v) => v,
+        Success(:final value) => value,
         Failure() => null,
       };
 
-  Exception? get errorOrNull => switch (this) {
+  Object? get errorOrNull => switch (this) {
         Success() => null,
-        Failure(error: final e) => e,
+        Failure(:final error) => error,
       };
 }
 
-class Success<T> extends Result<T> {
-  final T value;
+final class Success<T> extends Result<T> {
   const Success(this.value);
+  final T value;
 }
 
-class Failure<T> extends Result<T> {
-  final Exception error;
-  const Failure(this.error);
+final class Failure<T> extends Result<T> {
+  const Failure(this.error, [this.stackTrace]);
+
+  final Object error;
+  final StackTrace? stackTrace;
 }

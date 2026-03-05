@@ -1,35 +1,33 @@
 import 'package:flutter/foundation.dart';
 import 'result.dart';
 
-typedef CommandAction<TParam, TResult> = Future<Result<TResult>> Function(TParam param);
-
-class Command<TParam, TResult> extends ChangeNotifier {
-  final CommandAction<TParam, TResult> _action;
-
-  Command(this._action);
-
+abstract class Command<T> extends ChangeNotifier {
   bool _isExecuting = false;
+  Result<T>? _result;
 
   bool get isExecuting => _isExecuting;
+  Result<T>? get result => _result;
 
-  Result<TResult>? _result;
-  Result<TResult>? get result => _result;
+  bool get isSuccess => _result is Success<T>;
+  bool get isFailure => _result is Failure<T>;
 
-  Future<void> execute(TParam param) async {
-    if (_isExecuting) return;
+  T? get valueOrNull => _result?.valueOrNull;
+  Object? get errorOrNull => _result?.errorOrNull;
+
+  @protected
+  Future<void> execute(Future<Result<T>> Function() action) async {
+    if (_isExecuting) {
+      return;
+    }
 
     _isExecuting = true;
     _result = null;
     notifyListeners();
 
-    try {
-      _result = await _action(param);
-    } catch (e) {
-      _result = Failure(e is Exception ? e : Exception(e.toString()));
-    } finally {
-      _isExecuting = false;
-      notifyListeners();
-    }
+    _result = await action();
+
+    _isExecuting = false;
+    notifyListeners();
   }
 
   void clearResult() {
@@ -38,9 +36,9 @@ class Command<TParam, TResult> extends ChangeNotifier {
   }
 }
 
-class Command0<TResult> extends Command<void, TResult> {
-  Command0(Future<Result<TResult>> Function() action)
-      : super((_) => action());
+class Command0<T> extends Command<T> {
+  Command0(this._action);
+  final Future<Result<T>> Function() _action;
 
-  Future<void> execute0() => execute(null);
+  Future<void> run() => execute(_action);
 }

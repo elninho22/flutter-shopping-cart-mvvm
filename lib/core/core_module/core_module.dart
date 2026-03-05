@@ -3,7 +3,7 @@ import '../../exports.dart';
 
 class CoreModule extends Module {
   @override
-  void binds(Injector i) {
+  void exportedBinds(Injector i) {
     i.addLazySingleton<LoggerApp>(
       () => LoggerImpl(),
     );
@@ -16,6 +16,10 @@ class CoreModule extends Module {
     i.addLazySingleton<UiBottomSheet>(
       () => UiBottomSheetImpl(),
     );
+  }
+
+  @override
+  void binds(Injector i) {
     super.binds(i);
   }
 }

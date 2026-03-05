@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class UiThemeColors {
   const UiThemeColors();
 
-  static const Color primary = Color(0xFF8A05BE);
+  static const Color primary = Color(0xFF9BD5C0);
   static const Color darkColor = Color(0xFF530082);
   static const Color lightColor = Color(0xFFBA4DE3);
   static const Color black = Color(0xFF000000);
@@ -21,7 +21,6 @@ class UiThemeColors {
   static const Color neutral10 = Color(0xFFF5F7F7);
   static const Color white = Color(0xFFFFFFFF);
 
-  static const Color primaryGreen = Color(0xFFCEDF00);
   static const Color primaryAlpha = Color(0xFF9BD5C0);
   static const Color shade5 = Color(0xFFF2FEFF);
   static const Color m3SysLightOnSurface = Color(0xFF1F1F1F);

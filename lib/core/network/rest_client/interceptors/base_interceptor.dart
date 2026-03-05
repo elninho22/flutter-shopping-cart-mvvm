@@ -2,7 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../../core_library.dart';
+import '../../../core_exports.dart';
 
 
 class BaseInterceptor extends Interceptor {
