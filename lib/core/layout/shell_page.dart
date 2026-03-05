@@ -16,7 +16,7 @@ class ShellPage extends StatefulWidget {
 class _ShellPageState extends State<ShellPage> {
   String get _title {
     final routeName = ModalRoute.of(context)?.settings.name ?? '';
-    return routeName.endsWith('/cart') ? 'Carrinho' : 'Catálogo';
+    return routeName.endsWith(AppRoutes.cart) ? 'Carrinho' : 'Catálogo';
   }
 
   @override

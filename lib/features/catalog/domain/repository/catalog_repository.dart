@@ -1,5 +1,6 @@
 import '../../../../core/result.dart';
-import '../../../../exports.dart';
+import '../../../../domain/models/product/product.dart';
+
 
 abstract class CatalogRepository {
   Future<Result<List<Product>>> getProducts();

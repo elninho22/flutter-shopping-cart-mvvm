@@ -14,6 +14,5 @@ class AppModule extends Module {
   List<Module> get imports => [
     CoreModule(),
     CatalogModule(),
-    CartModule(),
   ];
 }

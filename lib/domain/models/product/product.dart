@@ -6,10 +6,10 @@ class Product {
   final String? description;
 
   const Product({
-    required this.id,
-    required this.name,
-    required this.price,
-    required this.imageUrl,
+    this.id,
+    this.name,
+    this.price,
+    this.imageUrl,
     this.description,
   });
 }

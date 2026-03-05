@@ -8,13 +8,14 @@ class CatalogRepositoryImpl implements CatalogRepository {
 
   @override
   Future<Result<List<Product>>> getProducts() async {
-    try {
-      final result = await _service.getProducts();
-      return Success(result.map((e) => e.toProduct()).toList());
-    } on RestClientException catch (e) {
-      return Failure(e);
-    } catch (e) {
-      return Failure(Exception('Erro ao listar produtos!'));
+    final result = await _service.getProducts();
+    if (result is Success<List<ProductDto>>) {
+      final products = result.value.map((e) => e.toProduct()).toList();
+      return Success(products);
+    } else if (result is Failure) {
+      return Failure(result.errorOrNull.toString());
+    } else {
+      return const Failure('Erro desconhecido');
     }
   }
 }
