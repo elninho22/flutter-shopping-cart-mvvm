@@ -1,7 +1,6 @@
 # Outforce App
 
-Este repositório contém o aplicativo Flutter "test_outforce_app" com uma
-arquitetura em camadas que facilita manutenção, testes e evolução.
+Desafio Flutter - App de Carrinho de Compras (Arquitetura MVVM)
 
 ---
 
