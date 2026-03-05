@@ -80,4 +80,12 @@ flutter test integration_test/
 
 - `dio`, `logger` – rede e logging
 - `flutter_modular` – injeção de dependência
-- `google_fonts`, `intl`, 
+- `google_fonts`, `intl`,
+
+<img width="300" height="600" alt="Screenshot_1772748718" src="https://github.com/user-attachments/assets/bd0c4e56-d48d-47ee-919f-c4592ad2e9b7" />
+<img width="300" height="600" alt="Screenshot_1772748713" src="https://github.com/user-attachments/assets/c4ee962f-15a9-43a4-ab93-cb189036d823" />
+<img width="300" height="600" alt="Screenshot_1772748708" src="https://github.com/user-attachments/assets/6073064e-bb31-4644-9579-f53e4ba7848c" />
+<img width="300" height="600" alt="Screenshot_1772748699" src="https://github.com/user-attachments/assets/e79b1982-f33f-450f-8fa6-66298a1c8902" />
+<img width="300" height="600" alt="Screenshot_1772748693" src="https://github.com/user-attachments/assets/62cbe8e0-7dcc-4797-928b-9632ac83903f" />
+<img width="300" height="600" alt="Screenshot_1772748682" src="https://github.com/user-attachments/assets/51b6f209-0629-4331-9611-c89d6d7de76e" />
+
