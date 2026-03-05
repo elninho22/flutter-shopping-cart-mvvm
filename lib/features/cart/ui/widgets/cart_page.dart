@@ -31,6 +31,7 @@ class _CartPageState extends State<CartPage> {
     }
 
     if (_vm.finalizeCartCommand.isSuccess) {
+      _vm.store.reset(); 
       Navigator.of(context).pushNamedAndRemoveUntil(
         AppRoutes.orderConfirmation,
         (route) => route.settings.name == AppRoutes.catalog,

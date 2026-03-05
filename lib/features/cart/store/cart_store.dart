@@ -30,7 +30,12 @@ class CartStore extends ChangeNotifier {
 
   void setFinalized(bool value) {
     _isFinalized = value;
+    notifyListeners();
+  }
+
+  void reset() {
     _items.clear();
+    _isFinalized = false;
     notifyListeners();
   }
 

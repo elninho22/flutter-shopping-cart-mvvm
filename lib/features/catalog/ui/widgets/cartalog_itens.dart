@@ -22,7 +22,7 @@ class CartalogItens extends StatelessWidget {
     child: Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(8),
           child: Column(
             spacing: 10,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +46,7 @@ class CartalogItens extends StatelessWidget {
                 children: [
                   Text(
                     item.price != null ? 'R\$ ${item.price!.toStringAsFixed(2)}' : 'indisponível',
-                    style: UiTextStyles.body12(color: UiThemeColors.secondaryText),
+                    style: UiTextStyles.body12(color: UiThemeColors.sucess),
                   ),
                   Expanded(
                     child: SizedBox(

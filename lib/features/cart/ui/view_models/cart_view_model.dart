@@ -21,6 +21,7 @@ class CartViewModel {
   late final Command0<void> finalizeCartCommand;
 
   Future<Result<void>> _addToCart(Product product) async {
+    
     if (!store.canAddProduct(product.id ?? '')) {
       return const Failure('Limite de 10 produtos diferentes atingido.');
     }
@@ -30,6 +31,7 @@ class CartViewModel {
       quantity: 1,
       currentItems: store.items,
     );
+
 
     switch (result) {
       case Success(value: final items):
@@ -68,6 +70,10 @@ class CartViewModel {
       return _removeFromCart(productId);
     }
 
+    if (!store.canAddProduct(productId)) {
+      return const Failure('Limite de 10 produtos diferentes atingido.');
+    }
+
     final result = await _repository.updateQuantity(
       productId: productId,
       quantity: quantity,
@@ -103,7 +109,7 @@ class CartViewModel {
         store.setFinalized(true);
         return const Success(null);
       case Failure(:final error, :final stackTrace):
-        store.setFinalized(true);
+        store.reset();
         return Failure(error, stackTrace);
     }
   }
