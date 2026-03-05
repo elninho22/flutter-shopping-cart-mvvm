@@ -40,25 +40,12 @@ formato usado pela camada de domínio.
      representar ações e seus resultados à interface.
    - `features/cart/`, `features/catalog/`.
 
-Além disso, o arquivo `app_module.dart` e `app_widget.dart` na raiz do
-`lib/` iniciam o Flutter Modular e carregam o tema e as rotas principais.
-
 ---
 
 ## 🛠 Requisitos para execução
 
-- **Flutter**: 3.41.4 (canal stable) – instalado a partir de
-  `https://github.com/flutter/flutter.git`
+- **Flutter**: 3.41.4 
 - **Dart SDK**: 3.11.1 (via `environment: sdk: ^3.11.0` no `pubspec.yaml`)
-- Ferramentas padrão: `flutter`, `dart`, `flutter_test`, `integration_test`.
-
-Você pode verificar as versões executando:
-
-```bash
-flutter --version
-# Flutter 3.41.4 • channel stable • …
-# Tools • Dart 3.11.1 • …
-```
 
 ---
 
@@ -66,34 +53,26 @@ flutter --version
 
 1. Clone o repositório e entre na pasta do projeto:
 
-```bash
+
 git clone <repo-url>
 cd appoutforce
-```
+
 
 2. Instale as dependências:
 
-```bash
 flutter pub get
-```
 
 3. Inicie em um dispositivo conectado ou emulador:
 
-```bash
 flutter run
-```
 
 4. Para executar os testes unitários e de widget:
 
-```bash
 flutter test
-```
 
 5. Para rodar os testes de integração:
 
-```bash
 flutter test integration_test/
-```
 
 ---
 
@@ -101,4 +80,4 @@ flutter test integration_test/
 
 - `dio`, `logger` – rede e logging
 - `flutter_modular` – injeção de dependência
-- `google_fonts`, `flutter_svg`, `intl`, etc. para UI e internacionalização
+- `google_fonts`, `intl`, 
