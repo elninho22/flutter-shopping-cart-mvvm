@@ -5,8 +5,8 @@ class CatalogService {
 
   CatalogService(this._network);
 
-  Future<List<CatalogDto>> getProducts() async {
+  Future<List<ProductDto>> getProducts() async {
     final response = await _network.unauth().get(ConstPath.products);
-    return (response.data as List).map((e) => CatalogDto.fromJson(e)).toList();
+    return (response.data as List).map((e) => ProductDto.fromJson(e)).toList();
   }
 }

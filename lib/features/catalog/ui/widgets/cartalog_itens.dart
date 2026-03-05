@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../exports.dart';
 
 class CartalogItens extends StatelessWidget {
-  final CatalogModel item;
+  final Product item;
   final VoidCallback? onAddToCart;
 
   const CartalogItens({
@@ -15,11 +15,11 @@ class CartalogItens extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ListTile(
     title: Text(
-      item.product.name ?? '',
+      item.name ?? '',
       style: UiTextStyles.heading16(),
     ),
     subtitle: Text(
-      '${item.product.description} • \$${item.product.price?.toStringAsFixed(2)}',
+      '${item.description} • \$${item.price?.toStringAsFixed(2)}',
       style: UiTextStyles.body14(),
       maxLines: 2,
       overflow: TextOverflow.ellipsis,

@@ -11,15 +11,13 @@ class CatalogViewModel extends ChangeNotifier {
     getProductsCommand = Command0<void>(_getProducts);
   }
 
-  final List<CatalogModel> _items = [];
-  List<CatalogModel> get items => List.unmodifiable(_items);
+  final List<Product> _items = [];
+  List<Product> get items => List.unmodifiable(_items);
 
   late final Command0<void> getProductsCommand;
 
-  Future<void> _setLoadingFake(Duration duration) => Future.delayed(duration);
-
   Future<Result<void>> _getProducts() async {
-    _setLoadingFake(const Duration(seconds: 1));
+    await _setLoadingFake(const Duration(seconds: 1));
     final result = await _repository.getProducts();
 
     switch (result) {
@@ -32,7 +30,9 @@ class CatalogViewModel extends ChangeNotifier {
     }
   }
 
-  void _setItems(List<CatalogModel> items) {
+  Future<void> _setLoadingFake(Duration duration) => Future.delayed(duration);
+
+  void _setItems(List<Product> items) {
     _items
       ..clear()
       ..addAll(items);

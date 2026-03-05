@@ -1,5 +1,4 @@
 import '../../../../core/result.dart';
-import '../../../../data/dtos/product_dto.dart';
 import '../../../../exports.dart';
 
 class CartService {
@@ -8,38 +7,25 @@ class CartService {
     required int quantity,
     required List<CartItemDto> currentItems,
   }) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    final differentIds = currentItems.map((i) => i.product.id).toSet();
-    if (!differentIds.contains(product.id) && differentIds.length >= 10) {
-      return const Failure(
-        'Não é possível adicionar mais de 10 produtos diferentes.',
-      );
-    }
-
-    final updated = List<CartItemDto>.from(currentItems);
-    final idx = updated.indexWhere((i) => i.product.id == product.id);
-    if (idx >= 0) {
-      updated[idx] = CartItemDto(
-        product: updated[idx].product,
-        quantity: updated[idx].quantity + quantity,
+    final dataItems = List<CartItemDto>.from(currentItems);
+    final indexItems = dataItems.indexWhere((i) => i.product.id == product.id);
+    if (indexItems >= 0) {
+      dataItems[indexItems] = CartItemDto(
+        product: dataItems[indexItems].product,
+        quantity: dataItems[indexItems].quantity + quantity,
       );
     } else {
-      updated.add(CartItemDto(product: product, quantity: quantity));
+      dataItems.add(CartItemDto(product: product, quantity: quantity));
     }
-    return Success(updated);
+    return Success(dataItems);
   }
 
   Future<Result<List<CartItemDto>>> removeFromCart({
     required String productId,
     required List<CartItemDto> currentItems,
   }) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    final updated = currentItems
-        .where((i) => i.product.id.toString() != productId)
-        .toList();
-    return Success(updated);
+    final dataItems = currentItems.where((i) => i.product.id.toString() != productId).toList();
+    return Success(dataItems);
   }
 
   Future<Result<List<CartItemDto>>> updateQuantity({
@@ -47,34 +33,18 @@ class CartService {
     required int quantity,
     required List<CartItemDto> currentItems,
   }) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    if (quantity <= 0) {
-      final updated = currentItems
-          .where((i) => i.product.id.toString() != productId)
-          .toList();
-      return Success(updated);
-    }
-
-    final updated = List<CartItemDto>.from(currentItems);
-    final idx = updated.indexWhere((i) => i.product.id.toString() == productId);
-    if (idx >= 0) {
-      updated[idx] = CartItemDto(
-        product: updated[idx].product,
+    final dataItems = List<CartItemDto>.from(currentItems);
+    final indexItems = dataItems.indexWhere((i) => i.product.id.toString() == productId);
+    if (indexItems >= 0) {
+      dataItems[indexItems] = CartItemDto(
+        product: dataItems[indexItems].product,
         quantity: quantity,
       );
     }
-    return Success(updated);
+    return Success(dataItems);
   }
 
   Future<Result<void>> finalizeCart({
     required List<CartItemDto> currentItems,
-  }) async {
-    await Future.delayed(const Duration(milliseconds: 800));
-
-    if (currentItems.isEmpty) {
-      return const Failure('Carrinho vazio não pode ser finalizado.');
-    }
-    return const Success(null);
-  }
+  }) async => const Success(null);
 }

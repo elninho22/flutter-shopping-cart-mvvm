@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../exports.dart';
 
 class CartalogItensEmpty extends StatelessWidget {
-  final CatalogModel item;
+  final Product item;
 
   const CartalogItensEmpty({
     super.key,
@@ -12,9 +12,9 @@ class CartalogItensEmpty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ListTile(
-    title: Text(item.product.description ?? ''),
+    title: Text(item.description ?? ''),
     subtitle: Text(
-      'Qtd: ${item.quantity} • \$${item.product.price?.toStringAsFixed(2)}',
+      '\$${item.price?.toStringAsFixed(2)}',
     ),
     trailing: IconButton(
       onPressed: () {},

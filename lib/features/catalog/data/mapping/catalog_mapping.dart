@@ -1,19 +1,11 @@
 import '../../../../exports.dart';
 
-
-extension CatalogDtoMapper on CatalogDto {
-  CatalogModel toEntity() {
-    final productEntity = Product(
-      id: product.id.toString(),
-      name: product.title,
-      price: product.price,
-      imageUrl: product.image,
-      description: product.description,
-    );
-
-    return CatalogModel(
-      product: productEntity,
-      quantity: quantity,
-    );
-  }
+extension ProductDtoMapper on ProductDto {
+  Product toProduct() => Product(
+        id: id.toString(),
+        name: title,
+        price: price,
+        imageUrl: image,
+        description: description,
+      );
 }

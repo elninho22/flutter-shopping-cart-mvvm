@@ -7,10 +7,10 @@ class CatalogRepositoryImpl implements CatalogRepository {
   CatalogRepositoryImpl(this._service);
 
   @override
-  Future<Result<List<CatalogModel>>> getProducts() async {
+  Future<Result<List<Product>>> getProducts() async {
     try {
       final result = await _service.getProducts();
-      return Success(result.map((e) => e.toEntity()).toList());
+      return Success(result.map((e) => e.toProduct()).toList());
     } on RestClientException catch (e) {
       return Failure(e);
     } catch (e) {

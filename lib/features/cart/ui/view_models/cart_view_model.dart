@@ -64,6 +64,10 @@ class CartViewModel {
       return const Failure('Carrinho finalizado não pode ser editado.');
     }
 
+    if (quantity <= 0) {
+      return _removeFromCart(productId);
+    }
+
     final result = await _repository.updateQuantity(
       productId: productId,
       quantity: quantity,
@@ -82,6 +86,10 @@ class CartViewModel {
   Future<Result<void>> _finalizeCart() async {
     if (!store.canEdit) {
       return const Failure('Carrinho já finalizado.');
+    }
+
+    if (store.items.isEmpty) {
+      return const Failure('Carrinho vazio não pode ser finalizado.');
     }
 
     final result = await _repository.finalizeCart(currentItems: store.items);

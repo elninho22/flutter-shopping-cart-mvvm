@@ -54,7 +54,7 @@ class _CatalogPageState extends State<CatalogPage> {
                   return CartalogItens(
                     item: item,
                     onAddToCart: _cartStore.canEdit
-                        ? () => _cartViewModel.addToCartCommand.run(item.product)
+                        ? () => _cartViewModel.addToCartCommand.run(item)
                         : null,
                   );
                 },
