@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../domain/models/cart_item.dart';
+import '../../../exports.dart';
 
 class CartStore extends ChangeNotifier {
   final List<CartItem> _items = [];
@@ -15,8 +15,12 @@ class CartStore extends ChangeNotifier {
       _items.map((i) => i.product.id).toSet().length;
 
   void setItems(List<CartItem> newItems) {
-    if (_isFinalized) return;
-    if (_exceedsMaxDifferentProducts(newItems)) return;
+    if (_isFinalized) {
+      return;
+    }
+    if (_maxProducts(newItems)) {
+      return;
+    }
 
     _items
       ..clear()
@@ -26,16 +30,29 @@ class CartStore extends ChangeNotifier {
 
   void setFinalized(bool value) {
     _isFinalized = value;
+    _items.clear();
     notifyListeners();
   }
 
-  bool _exceedsMaxDifferentProducts(List<CartItem> list) =>
+  bool _maxProducts(List<CartItem> list) =>
       list.map((i) => i.product.id).toSet().length > 10;
 
 
   bool canAddProduct(String productId) {
-    if (_isFinalized) return false;
-    if (_items.any((i) => i.product.id == productId)) return true;
+    if (_isFinalized) {
+      return false;
+    }
+    if (_items.any((i) => i.product.id == productId)) {
+      return true;
+    }
     return _differentProductsCount < 10;
+  }
+
+  int getProductQuantity(String productId) {
+    final item = _items.firstWhere(
+      (i) => i.product.id == productId,
+      orElse: () => const CartItem(product: Product(id: '', name: '', price: null, imageUrl: ''), quantity: 0),
+    );
+    return item.quantity;
   }
 }

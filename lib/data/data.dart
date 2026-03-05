@@ -1,1 +1,1 @@
-export 'dtos/product_dto.dart';
+export 'dtos/product/product_dto.dart';

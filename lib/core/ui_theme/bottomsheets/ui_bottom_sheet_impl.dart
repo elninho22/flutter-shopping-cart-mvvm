@@ -57,7 +57,7 @@ class _BottomSheetContent extends StatelessWidget {
           width: 40,
           height: 4,
           decoration: BoxDecoration(
-            color: UiThemeColors.lightColor,
+            color: UiThemeColors.black,
             borderRadius: BorderRadius.circular(2),
           ),
         ),
@@ -66,7 +66,7 @@ class _BottomSheetContent extends StatelessWidget {
           title,
           style: UiTextStyles.heading20(
             fontWeight: FontWeight.bold,
-            color: UiThemeColors.darkColor,
+            color: UiThemeColors.black,
           ),
           textAlign: TextAlign.center,
         ),

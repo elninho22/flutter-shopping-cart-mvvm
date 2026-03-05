@@ -46,5 +46,5 @@ class CartService {
 
   Future<Result<void>> finalizeCart({
     required List<CartItemDto> currentItems,
-  }) async => const Success(null);
+  }) async => const Failure('Erro ao finalizar pedido ( msg de erro simulado - SERVICE)');
 }

@@ -1,4 +1,4 @@
-import '../../../../data/dtos/product_dto.dart';
+import '../../../../data/dtos/product/product_dto.dart';
 
 class CartItemDto {
   final ProductDto product;

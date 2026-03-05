@@ -11,17 +11,9 @@ class AppModule extends Module {
   }
 
   @override
-  List<Module> get imports => [CoreModule()];
-
-  @override
-  void routes(RouteManager r) {
-    r.child(
-      '/',
-      child: (_) => ShellPage(cartStore: Modular.get<CartStore>()),
-      children: [
-        ModuleRoute('/catalog', module: CatalogModule()),
-        ModuleRoute('/cart', module: CartModule()),
-      ],
-    );
-  }
+  List<Module> get imports => [
+    CoreModule(),
+    CatalogModule(),
+    CartModule(),
+  ];
 }

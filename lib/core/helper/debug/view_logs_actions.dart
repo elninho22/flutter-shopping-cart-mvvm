@@ -35,8 +35,7 @@ class _ViewLogsActionsState extends State<ViewLogsActions> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       child: AnimatedBuilder(
         animation: _refresh,
-        builder: (_, __) {
-          return SingleChildScrollView(
+        builder: (_, _) => SingleChildScrollView(
             child: Column(
               spacing: 16,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,8 +45,7 @@ class _ViewLogsActionsState extends State<ViewLogsActions> {
                 bt(() async => _refresh.chageAccessToken(), 'Inativar Access Token'),
               ],
             ),
-          );
-        },
+          ),
       ),
     ),
   );

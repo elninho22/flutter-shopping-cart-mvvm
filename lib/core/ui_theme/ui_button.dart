@@ -55,7 +55,7 @@ class UiButton extends StatelessWidget {
   }) {
     textColor = UiThemeColors.white;
     style = FilledButton.styleFrom(
-      backgroundColor: UiThemeColors.darkColor,
+      backgroundColor: UiThemeColors.primaryAlpha,
       padding: const EdgeInsets.symmetric(
         horizontal: 12,
         vertical: 12,

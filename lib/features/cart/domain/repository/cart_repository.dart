@@ -1,5 +1,5 @@
 import '../../../../core/result.dart';
-import '../../../../domain/models/product.dart';
+import '../../../../domain/models/product/product.dart';
 import '../../cart_export.dart';
 
 

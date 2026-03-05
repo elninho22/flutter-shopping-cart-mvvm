@@ -83,7 +83,11 @@ class CartViewModel {
     }
   }
 
+  Future<void> _setLoadingFake(Duration duration) => Future.delayed(duration);
+
   Future<Result<void>> _finalizeCart() async {
+    await _setLoadingFake(const Duration(seconds: 1));
+
     if (!store.canEdit) {
       return const Failure('Carrinho já finalizado.');
     }
@@ -99,6 +103,7 @@ class CartViewModel {
         store.setFinalized(true);
         return const Success(null);
       case Failure(:final error, :final stackTrace):
+        store.setFinalized(true);
         return Failure(error, stackTrace);
     }
   }

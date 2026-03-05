@@ -17,10 +17,14 @@ class CatalogModule extends Module {
       ),
     );
 
-     i.addLazySingleton<CatalogRepository>(
+    i.addLazySingleton<CatalogRepository>(
       () => Modular.get<CatalogRepositoryImpl>(),
     );
-    i.add(CatalogViewModel.new);
+    i.addLazySingleton<CatalogViewModel>(
+      () => CatalogViewModel(
+        Modular.get<CatalogRepository>(),
+      ),
+    );
   }
 
   @override

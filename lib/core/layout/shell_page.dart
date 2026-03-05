@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -13,23 +14,9 @@ class ShellPage extends StatefulWidget {
 }
 
 class _ShellPageState extends State<ShellPage> {
-  String get _title =>
-      Modular.to.path.endsWith('/cart') ? 'Carrinho' : 'Catálogo';
-
-  @override
-  void initState() {
-    super.initState();
-    Modular.to.addListener(_onRouteChange);
-  }
-
-  @override
-  void dispose() {
-    Modular.to.removeListener(_onRouteChange);
-    super.dispose();
-  }
-
-  void _onRouteChange() {
-    if (mounted) setState(() {});
+  String get _title {
+    final routeName = ModalRoute.of(context)?.settings.name ?? '';
+    return routeName.endsWith('/cart') ? 'Carrinho' : 'Catálogo';
   }
 
   @override
@@ -37,16 +24,19 @@ class _ShellPageState extends State<ShellPage> {
         listenable: widget.cartStore,
         builder: (context, _) {
           final cartStore = widget.cartStore;
+          final routeName = ModalRoute.of(context)?.settings.name ?? '';
+          final isCart = routeName.endsWith(AppRoutes.cart);
+
           return Scaffold(
             appBar: AppBar(
               title: Text(
                 _title,
                 style: UiTextStyles.heading20(),
               ),
-              leading: Modular.to.path.endsWith('/cart')
+              leading: isCart
                   ? IconButton(
                       icon: const Icon(Icons.arrow_back),
-                      onPressed: () => Modular.to.navigate('/catalog'),
+                      onPressed: () => Navigator.of(context).pushReplacementNamed(AppRoutes.catalog),
                     )
                   : null,
               actions: [
@@ -55,12 +45,24 @@ class _ShellPageState extends State<ShellPage> {
                     label: Text('${cartStore.itemCount}'),
                     child: const Icon(Icons.shopping_cart),
                   ),
-                  onPressed: () => Modular.to.navigate('/cart'),
+                  onPressed: () => Navigator.of(context).pushNamed(AppRoutes.cart),
                 ),
               ],
             ),
-            body: const RouterOutlet(),
+            body: _buildBody(isCart),
           );
         },
       );
+
+  Widget _buildBody(bool isCart) {
+    if (isCart) {
+      return CartPage(viewModel: Modular.get<CartViewModel>());
+    } else {
+      return CatalogPage(
+        viewModel: Modular.get<CatalogViewModel>(),
+        cartViewModel: Modular.get<CartViewModel>(),
+        cartStore: widget.cartStore,
+      );
+    }
+  }
 }

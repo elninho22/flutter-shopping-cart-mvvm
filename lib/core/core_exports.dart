@@ -1,3 +1,4 @@
+export './routes/routes_export.dart';
 export 'constants/contants_export.dart';
 export 'core_module/module_core.dart';
 export 'helper/debug/debug_app.dart';
