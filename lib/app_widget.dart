@@ -32,6 +32,7 @@ class _AppWidgetState extends State<AppWidget> {
 }
 
 MaterialApp appMaterialApp() => MaterialApp(
+  navigatorKey: NavigatorHelper.nav,
   debugShowCheckedModeBanner: false,
   title: ConstStrings.appName,
   theme: UiConfigDefault.theme,
@@ -61,7 +62,8 @@ class AppLogsApplication extends StatelessWidget {
             child: FloatingActionButton(
               elevation: 0,
               backgroundColor: Colors.blue.withValues(alpha: 0.25),
-              onPressed: () => Navigator.of(context).pushNamed(AppRoutes.cart),
+              onPressed: () => NavigatorHelper.nav.currentState?.pushNamed(AppRoutes.debug),
+
               child: Icon(Icons.build, color: Colors.white.withValues(alpha: 0.25)),
             ),
           ),
